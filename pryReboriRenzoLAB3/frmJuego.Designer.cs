@@ -1,15 +1,15 @@
 ﻿
 namespace pryReboriRenzoLAB3
 {
-    partial class frmMain
+    partial class frmJuego
     {
         /// <summary>
-        ///  Required designer variable.
+        /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        ///  Clean up any resources being used.
+        /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
@@ -24,22 +24,22 @@ namespace pryReboriRenzoLAB3
         #region Windows Form Designer generated code
 
         /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
             this.SuspendLayout();
             // 
-            // frmMain
+            // frmJuego
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(441, 317);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmMain";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.frmMain_Load);
+            this.ClientSize = new System.Drawing.Size(578, 323);
+            this.Name = "frmJuego";
+            this.Text = "frmJuego";
+            this.Load += new System.EventHandler(this.frmJuego_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmJuego_KeyDown);
             this.ResumeLayout(false);
 
         }
@@ -47,4 +47,3 @@ namespace pryReboriRenzoLAB3
         #endregion
     }
 }
-
