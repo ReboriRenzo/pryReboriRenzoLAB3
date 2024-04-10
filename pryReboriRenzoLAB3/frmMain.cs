@@ -12,10 +12,16 @@ namespace pryReboriRenzoLAB3
 {
     public partial class frmMain : Form
     {
+        //Declaracion de variables globales
+
         public frmMain()
         {
             InitializeComponent();
         }
 
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
