@@ -29,22 +29,58 @@ namespace pryReboriRenzoLAB3
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            lblPuntaje = new System.Windows.Forms.Label();
+            temporizadorDisparo = new System.Windows.Forms.Timer(components);
+            lblPuntos = new System.Windows.Forms.Label();
+            SuspendLayout();
+            // 
+            // lblPuntaje
+            // 
+            lblPuntaje.AutoSize = true;
+            lblPuntaje.Font = new System.Drawing.Font("Yu Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lblPuntaje.ForeColor = System.Drawing.Color.Red;
+            lblPuntaje.Location = new System.Drawing.Point(551, 9);
+            lblPuntaje.Name = "lblPuntaje";
+            lblPuntaje.Size = new System.Drawing.Size(65, 17);
+            lblPuntaje.TabIndex = 0;
+            lblPuntaje.Text = "PUNTOS";
+            // 
+            // temporizadorDisparo
+            // 
+            temporizadorDisparo.Enabled = true;
+            temporizadorDisparo.Tick += timer1_Tick;
+            // 
+            // lblPuntos
+            // 
+            lblPuntos.AutoSize = true;
+            lblPuntos.Location = new System.Drawing.Point(622, 11);
+            lblPuntos.Name = "lblPuntos";
+            lblPuntos.Size = new System.Drawing.Size(38, 15);
+            lblPuntos.TabIndex = 1;
+            lblPuntos.Text = "label1";
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(519, 353);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmMain";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.frmMain_Load);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            ClientSize = new System.Drawing.Size(653, 399);
+            Controls.Add(lblPuntos);
+            Controls.Add(lblPuntaje);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            Name = "frmMain";
+            Text = "Form1";
+            Load += frmMain_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private System.Windows.Forms.Label lblPuntaje;
+        private System.Windows.Forms.Timer temporizadorDisparo;
+        private System.Windows.Forms.Label lblPuntos;
     }
 }
 
