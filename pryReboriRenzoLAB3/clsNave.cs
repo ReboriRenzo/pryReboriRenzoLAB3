@@ -12,6 +12,7 @@ namespace pryReboriRenzoLAB3
         string nombre;
         int puntosDaño;
         public PictureBox imgNave;
+
         public void CrearJugador()
         {
             vida = 100;
