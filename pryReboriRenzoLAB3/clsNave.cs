@@ -21,7 +21,7 @@ namespace pryReboriRenzoLAB3
         public void CrearJugador()
         {
             vida = 100;
-            nombre = "Jugador1";
+            nombre = "Mi nave RENZO";
             puntosDeDaños = 1;
             imgNave = new PictureBox();
             imgNave.SizeMode = PictureBoxSizeMode.StretchImage;
