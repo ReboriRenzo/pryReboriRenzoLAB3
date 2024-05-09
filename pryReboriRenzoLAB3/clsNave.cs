@@ -25,7 +25,7 @@ namespace pryReboriRenzoLAB3
             puntosDeDaños = 1;
             imgNave = new PictureBox();
             imgNave.SizeMode = PictureBoxSizeMode.StretchImage;
-            imgNave.ImageLocation = "https://www.bing.com/images/search?view=detailV2&ccid=ra0aMEca&id=48F62745701D96A6716291DB652EFF19791547E3&thid=OIP.ra0aMEcamcoXwrW_QVFgxQHaFW&mediaurl=https%3a%2f%2fwww.vhv.rs%2fdpng%2fd%2f488-4889272_galaga-pixel-art-hd-png-download.png&cdnurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.adad1a30471a99ca17c2b5bf415160c5%3frik%3d40cVeRn%252fLmXbkQ%26pid%3dImgRaw%26r%3d0&exph=621&expw=860&q=GALAGA+IMAGENES&simid=608044989035731287&FORM=IRPRST&ck=265B7799496EBA8C1484828B33EE15E8&selectedIndex=40&itb=0";
+            imgNave.ImageLocation = "https://art.pixilart.com/ae81e5e14ff674d.gif";
         }
         public void CrearEnemigos()
         {
@@ -36,21 +36,21 @@ namespace pryReboriRenzoLAB3
             puntosDeDaños = 10;
             imgNaveEnemiga = new PictureBox();
             imgNaveEnemiga.SizeMode = PictureBoxSizeMode.StretchImage;
-            imgNaveEnemiga.ImageLocation = "https://www.pngwing.com/es/free-png-njood";
+            imgNaveEnemiga.ImageLocation = "https://i.gifer.com/MvA.gif";
 
             vida = 20;
             nombre = "Enemigo2";
             puntosDeDaños = 100;
             imgNaveEnemiga2 = new PictureBox();
             imgNaveEnemiga2.SizeMode = PictureBoxSizeMode.StretchImage;
-            imgNaveEnemiga2.ImageLocation = "https://www.pngwing.com/es/free-png-zcgzm";
+            imgNaveEnemiga2.ImageLocation = "https://i.gifer.com/origin/cf/cf75a94995efd5a532afe5b4f08f6007_w200.gif";
 
             vida = 30;
             nombre = "Enemigo3";
             puntosDeDaños = 100;
             imgNaveEnemiga3 = new PictureBox();
             imgNaveEnemiga3.SizeMode = PictureBoxSizeMode.StretchImage;
-            imgNaveEnemiga3.ImageLocation = "https://www.pngwing.com/es/free-png-ygrqb";
+            imgNaveEnemiga3.ImageLocation = "https://i.ytimg.com/vi/xEaqhhjqxLA/maxresdefault.jpg";
 
         }
 

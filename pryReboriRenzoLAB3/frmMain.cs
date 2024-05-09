@@ -38,37 +38,51 @@ namespace pryReboriRenzoLAB3
             ObjNavejuegador = new clsNave();
             ObjNavejuegador.CrearJugador();
             Controls.Add(ObjNavejuegador.imgNave);
-            ObjNavejuegador.imgNave.Location = new Point(350, 400);                                                         
+            ObjNavejuegador.imgNave.Location = new Point(350, 400);
             ObjEnemigo = new clsNave();
+
+            //Enemigo3
+            ObjEnemigo.CrearEnemigos();
+            Controls.Add(ObjEnemigo.imgNaveEnemiga);
+           ObjEnemigo.imgNaveEnemiga.Location = new Point(700, 150);
+
+            //Enemigo2
+            ObjEnemigo.CrearEnemigos();
+            Controls.Add(ObjEnemigo.imgNaveEnemiga2);
+            ObjEnemigo.imgNaveEnemiga2.Location = new Point(100, 100);
+
+            //Enemigo3
+            ObjEnemigo.CrearEnemigos();
+            Controls.Add(ObjEnemigo.imgNaveEnemiga3);
+            ObjEnemigo.imgNaveEnemiga3.Location = new Point(375, 150);
         }
 
-        private void frmJuegos_KeyDown(object sender, KeyEventArgs e)
+        private void frmMain_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Right)// Si se presiona la tecla de flecha derecha
+            if (e.KeyCode == Keys.Right)
             {
-                ObjNavejuegador.imgNave.Location = new Point(ObjNavejuegador.imgNave.Location.X + 5, // Mueve la nave 5 píxeles hacia la derecha
+                ObjNavejuegador.imgNave.Location = new Point(ObjNavejuegador.imgNave.Location.X + 5, 
                 ObjNavejuegador.imgNave.Location.Y);
             }
-            if (e.KeyCode == Keys.Left) // Si se presiona la tecla de flecha izquierda
+            if (e.KeyCode == Keys.Left) 
             {
-                ObjNavejuegador.imgNave.Location = new Point(ObjNavejuegador.imgNave.Location.X - 5, // Mueve la nave 5 píxeles hacia la izquierda
+                ObjNavejuegador.imgNave.Location = new Point(ObjNavejuegador.imgNave.Location.X - 5,
                 ObjNavejuegador.imgNave.Location.Y);
             }
         }
 
-        private void frmJuegos_KeyUp(object sender, KeyEventArgs e)
+        private void frmMain_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Up)
             {
 
-                ObjNavejuegador.imgNave.Location = new Point(ObjNavejuegador.imgNave.Location.X,
-                                                              ObjNavejuegador.imgNave.Location.Y - 5);//es con el y
+                ObjNavejuegador.imgNave.Location = new Point(ObjNavejuegador.imgNave.Location.X,ObjNavejuegador.imgNave.Location.Y - 5);
             }
             if (e.KeyCode == Keys.Down)
             {
 
                 ObjNavejuegador.imgNave.Location = new Point(ObjNavejuegador.imgNave.Location.X,
-                                                              ObjNavejuegador.imgNave.Location.Y + 5);//es con el y
+                                                              ObjNavejuegador.imgNave.Location.Y + 5);
             }
             if (e.KeyCode == Keys.Space)
             {
@@ -115,7 +129,7 @@ namespace pryReboriRenzoLAB3
                 }
             }
         }
-        private void frmJuegos_KeyPress(object sender, KeyPressEventArgs e)
+        private void frmMain_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Space)
             {
@@ -152,41 +166,13 @@ namespace pryReboriRenzoLAB3
                     Math.Abs(posX - enemigo.Location.X) < 100 &&
                     Math.Abs(posY - enemigo.Location.Y) < 100);
 
-                
+
                 if (MuyCerca)
                 {
                     contador++;
                     continue;
                 }
-
-                
-                switch (EnemigosAleatorios.Next(1000, 3000))
-                {
-                    case < 2500:
-                        ObjEnemigo.CrearEnemigos();
-                        ObjEnemigo.imgNaveEnemiga.Location = new Point(posX, posY);
-                        Controls.Add(ObjEnemigo.imgNaveEnemiga);
-                        ObjEnemigo.imgNaveEnemiga.Tag = "enemigo";
-                        break;
-                    case > 2000:
-                        ObjEnemigo.CrearEnemigos();
-                        ObjEnemigo.imgNaveEnemiga2.Location = new Point(posX, posY);
-                        Controls.Add(ObjEnemigo.imgNaveEnemiga2);
-                        ObjEnemigo.imgNaveEnemiga2.Tag = "enemigo";
-                        break;
-                    case > 1500:
-                        ObjEnemigo.CrearEnemigos();
-                        ObjEnemigo.imgNaveEnemiga3.Location = new Point(posX, posY);
-                        Controls.Add(ObjEnemigo.imgNaveEnemiga3);
-                        ObjEnemigo.imgNaveEnemiga3.Tag = "enemigo";
-                        break;
-                    default:
-
-                    break;
-                }
-
-                contador++; 
-            }
+        }
             temporizadorDisparo.Stop();
 
 
@@ -217,30 +203,7 @@ namespace pryReboriRenzoLAB3
                 }
 
                 
-                int codigoEnemigo = EnemigosAleatorios.Next(1000, 3000); 
-                switch (codigoEnemigo)
-                {
-                    case < 2000:
-                        ObjEnemigo.CrearEnemigos();
-                        ObjEnemigo.imgNaveEnemiga.Location = new Point(posX, posY);
-                        Controls.Add(ObjEnemigo.imgNaveEnemiga);
-                        ObjEnemigo.imgNaveEnemiga.Tag = "enemigo";
-                        break;
-                    case > 2500:
-                        ObjEnemigo.CrearEnemigos();
-                        ObjEnemigo.imgNaveEnemiga2.Location = new Point(posX, posY);
-                        Controls.Add(ObjEnemigo.imgNaveEnemiga2);
-                        ObjEnemigo.imgNaveEnemiga2.Tag = "enemigo";
-                        break;
-                    case > 1000:
-                        ObjEnemigo.CrearEnemigos();
-                        ObjEnemigo.imgNaveEnemiga3.Location = new Point(posX, posY);
-                        Controls.Add(ObjEnemigo.imgNaveEnemiga3);
-                        ObjEnemigo.imgNaveEnemiga3.Tag = "enemigo";
-                        break;
-                    default:
-                        break;
-                }
+               
 
                 
                 contadorIntentos = 0;

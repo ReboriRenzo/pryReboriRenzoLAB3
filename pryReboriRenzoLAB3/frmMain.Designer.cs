@@ -40,7 +40,7 @@ namespace pryReboriRenzoLAB3
             lblPuntaje.AutoSize = true;
             lblPuntaje.Font = new System.Drawing.Font("Yu Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             lblPuntaje.ForeColor = System.Drawing.Color.Red;
-            lblPuntaje.Location = new System.Drawing.Point(551, 9);
+            lblPuntaje.Location = new System.Drawing.Point(744, 9);
             lblPuntaje.Name = "lblPuntaje";
             lblPuntaje.Size = new System.Drawing.Size(65, 17);
             lblPuntaje.TabIndex = 0;
@@ -54,7 +54,7 @@ namespace pryReboriRenzoLAB3
             // lblPuntos
             // 
             lblPuntos.AutoSize = true;
-            lblPuntos.Location = new System.Drawing.Point(622, 11);
+            lblPuntos.Location = new System.Drawing.Point(815, 11);
             lblPuntos.Name = "lblPuntos";
             lblPuntos.Size = new System.Drawing.Size(38, 15);
             lblPuntos.TabIndex = 1;
@@ -65,7 +65,7 @@ namespace pryReboriRenzoLAB3
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            ClientSize = new System.Drawing.Size(653, 399);
+            ClientSize = new System.Drawing.Size(864, 538);
             Controls.Add(lblPuntos);
             Controls.Add(lblPuntaje);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
