@@ -23,11 +23,10 @@ namespace pryReboriRenzoLAB3
 
         clsNave ObjNavejuegador;
         clsNave ObjEnemigo;
-        clsNave Disparo;
-        PictureBox disparo;
+        PictureBox Disparo;
         bool espacio = false;
         List<PictureBox> listaDisparos = new List<PictureBox>();
-        int puntos = 0;
+        private int puntaje = 0;
         Random EnemigosAleatorios = new Random();
         Random PosicionX = new Random();
         Random PosicionY = new Random();
@@ -44,7 +43,7 @@ namespace pryReboriRenzoLAB3
             //Enemigo3
             ObjEnemigo.CrearEnemigos();
             Controls.Add(ObjEnemigo.imgNaveEnemiga);
-           ObjEnemigo.imgNaveEnemiga.Location = new Point(700, 150);
+            ObjEnemigo.imgNaveEnemiga.Location = new Point(500, 150);
 
             //Enemigo2
             ObjEnemigo.CrearEnemigos();
@@ -54,161 +53,104 @@ namespace pryReboriRenzoLAB3
             //Enemigo3
             ObjEnemigo.CrearEnemigos();
             Controls.Add(ObjEnemigo.imgNaveEnemiga3);
-            ObjEnemigo.imgNaveEnemiga3.Location = new Point(375, 150);
+            ObjEnemigo.imgNaveEnemiga3.Location = new Point(305, 175);
         }
 
-        private void frmMain_KeyDown(object sender, KeyEventArgs e)
+        private void frmMain_KeyDown_1(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Right)
             {
-                ObjNavejuegador.imgNave.Location = new Point(ObjNavejuegador.imgNave.Location.X + 5, 
-                ObjNavejuegador.imgNave.Location.Y);
+                ObjNavejuegador.imgNave.Location = new Point(ObjNavejuegador.imgNave.Location.X + 5, ObjNavejuegador.imgNave.Location.Y);
             }
-            if (e.KeyCode == Keys.Left) 
+            if (e.KeyCode == Keys.Left)
             {
-                ObjNavejuegador.imgNave.Location = new Point(ObjNavejuegador.imgNave.Location.X - 5,
-                ObjNavejuegador.imgNave.Location.Y);
+                ObjNavejuegador.imgNave.Location = new Point(ObjNavejuegador.imgNave.Location.X - 5, ObjNavejuegador.imgNave.Location.Y);
             }
         }
 
-        private void frmMain_KeyUp(object sender, KeyEventArgs e)
+        private void frmMain_KeyUp_1(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Up)
             {
 
-                ObjNavejuegador.imgNave.Location = new Point(ObjNavejuegador.imgNave.Location.X,ObjNavejuegador.imgNave.Location.Y - 5);
+                ObjNavejuegador.imgNave.Location = new Point(ObjNavejuegador.imgNave.Location.X, ObjNavejuegador.imgNave.Location.Y - 5);
             }
             if (e.KeyCode == Keys.Down)
             {
 
-                ObjNavejuegador.imgNave.Location = new Point(ObjNavejuegador.imgNave.Location.X,
-                                                              ObjNavejuegador.imgNave.Location.Y + 5);
+                ObjNavejuegador.imgNave.Location = new Point(ObjNavejuegador.imgNave.Location.X, ObjNavejuegador.imgNave.Location.Y + 5);
             }
-            if (e.KeyCode == Keys.Space)
-            {
-                espacio = false;
-                temporizadorDisparo.Stop();
-
-            }
-
-
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void frmMain_KeyPress_1(object sender, KeyPressEventArgs e)
         {
-            foreach (PictureBox disparo in listaDisparos.ToList())
+            if (e.KeyChar == (char)Keys.Space)
             {
 
+                Disparo = new PictureBox();
+                Disparo.BackColor = Color.Black;
+                Disparo.Size = new Size(30, 40);
+                Disparo.SizeMode = PictureBoxSizeMode.StretchImage;
+                Disparo.ImageLocation = "https://img.freepik.com/fotos-premium/imagen-bala-sobre-fondo-negro_908985-50607.jpg";
+
+                Disparo.Location = new Point(ObjNavejuegador.imgNave.Location.X + ObjNavejuegador.imgNave.Width / 2 - Disparo.Width / 2, ObjNavejuegador.imgNave.Location.Y);
+                Controls.Add(Disparo);
+                listaDisparos.Add(Disparo);
+            }
+
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            // Itera sobre cada disparo en la lista
+            foreach (PictureBox disparo in listaDisparos.ToList())
+            {
                 if (disparo != null && disparo.Location.Y > 0)
                 {
-
                     disparo.Location = new Point(
                         disparo.Location.X,
                         disparo.Location.Y - 10);
 
-
-                    foreach (Control enemigo in Controls)
+                    // Verifica si hay colisión entre el disparo y algún enemigo
+                    foreach (Control control in Controls)
                     {
-
-                        if (enemigo.Tag == "enemigo" && disparo.Bounds.IntersectsWith(enemigo.Bounds))
+                        if (control is PictureBox && control != disparo)
                         {
+                            // Comprueba que el control no sea la nave del jugador
+                            if (control != ObjNavejuegador.imgNave)
+                            {
+                                // Si la colisión ocurre, elimina tanto al disparo como al enemigo
+                                if (disparo.Bounds.IntersectsWith(control.Bounds))
+                                {
+                                    Controls.Remove(disparo);
+                                    listaDisparos.Remove(disparo);
+                                    Controls.Remove(control);
+                                    control.Dispose();
 
-                            Controls.Remove(enemigo);
-                            Controls.Remove(disparo);
-                            listaDisparos.Remove(disparo);
-                            puntos++;
-                            lblPuntos.Text = "Puntos: " + puntos.ToString();
-                            break;
+                                    // Incrementar el puntaje
+                                    puntaje += 100;
+                                    ActualizarPuntaje(); // Llama a un método para mostrar el puntaje actualizado
+
+                                    break; // Sale del bucle interior para evitar colisiones múltiples
+                                }
+                            }
                         }
                     }
                 }
                 else
                 {
+                    // Si el disparo sale de la pantalla, elimínalo y remuévelo de la lista
                     Controls.Remove(disparo);
                     listaDisparos.Remove(disparo);
                 }
             }
         }
-        private void frmMain_KeyPress(object sender, KeyPressEventArgs e)
+
+        private void ActualizarPuntaje()
         {
-            if (e.KeyChar == (char)Keys.Space)
-            {
-
-                disparo = new PictureBox();
-                disparo.BackColor = Color.Blue;
-                disparo.Size = new Size(10, 15);
-                disparo.SizeMode = PictureBoxSizeMode.StretchImage;
-
-                disparo.Location = new Point(ObjNavejuegador.imgNave.Location.X + ObjNavejuegador.imgNave.Width / 2 - disparo.Width / 2,
-                                             ObjNavejuegador.imgNave.Location.Y);
-                Controls.Add(disparo);
-                listaDisparos.Add(disparo);
-                GenerarNuevoEnemigo();
-            }
-
-        }
-
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-
-            int posX = 0;
-            int posY = 0;
-            int contador = 0;
-            // SE CREA UNA X CANTIDAD DE ENEMIGOS CON SU POSICION SIN QUE ESTEN CERCA DE NUESTRA NAVE
-            while (contador < 7)             
-            { 
-                posX = PosicionX.Next(0, 800);
-                posY = PosicionY.Next(0, 300);
-
-                
-                bool MuyCerca = Controls.OfType<PictureBox>().Any(enemigo =>
-                    enemigo.Tag == "enemigo" &&
-                    Math.Abs(posX - enemigo.Location.X) < 100 &&
-                    Math.Abs(posY - enemigo.Location.Y) < 100);
-
-
-                if (MuyCerca)
-                {
-                    contador++;
-                    continue;
-                }
-        }
-            temporizadorDisparo.Stop();
-
-
-
-
-
-        }
-        private void GenerarNuevoEnemigo()
-        {
-            int contadorIntentos = 0;
-
-            while (contadorIntentos < 10) 
-            {
-                
-                int posX = PosicionX.Next(0, 800);
-                int posY = PosicionY.Next(0, 300);
-
-                bool MuyCerca = Controls.OfType<PictureBox>().Any(enemigo =>
-                    enemigo.Tag == "enemigo" &&
-                    Math.Abs(posX - enemigo.Location.X) < 100 &&
-                    Math.Abs(posY - enemigo.Location.Y) < 100);
-
-                
-                if (MuyCerca)
-                {
-                    contadorIntentos++;
-                    continue;
-                }
-
-                
-               
-
-                
-                contadorIntentos = 0;
-                break; 
-            }
+            // Muestra el puntaje actualizado en algún lugar de tu formulario
+            // Por ejemplo, en un label llamado lblPuntaje
+            lblPuntaje.Text = "PUNTAJE: " + puntaje.ToString();
         }
     }
+    
 }

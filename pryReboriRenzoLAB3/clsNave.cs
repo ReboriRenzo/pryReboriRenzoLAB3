@@ -43,14 +43,15 @@ namespace pryReboriRenzoLAB3
             puntosDeDaños = 100;
             imgNaveEnemiga2 = new PictureBox();
             imgNaveEnemiga2.SizeMode = PictureBoxSizeMode.StretchImage;
-            imgNaveEnemiga2.ImageLocation = "https://i.gifer.com/origin/cf/cf75a94995efd5a532afe5b4f08f6007_w200.gif";
+            imgNaveEnemiga2.ImageLocation = "https://gifdb.com/images/high/galaga-blue-bug-alien-zc52r4kke3ayd4jy.gif";
 
             vida = 30;
             nombre = "Enemigo3";
             puntosDeDaños = 100;
             imgNaveEnemiga3 = new PictureBox();
             imgNaveEnemiga3.SizeMode = PictureBoxSizeMode.StretchImage;
-            imgNaveEnemiga3.ImageLocation = "https://i.ytimg.com/vi/xEaqhhjqxLA/maxresdefault.jpg";
+            imgNaveEnemiga3.ImageLocation = "https://gifdb.com/images/thumbnail/galaga-boss-1000-hit-wwrjpsiqh7cbi97u.gif";
+
 
         }
 
