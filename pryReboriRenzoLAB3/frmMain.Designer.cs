@@ -32,6 +32,7 @@ namespace pryReboriRenzoLAB3
             components = new System.ComponentModel.Container();
             temporizadorDisparo = new System.Windows.Forms.Timer(components);
             lblPuntaje = new System.Windows.Forms.Label();
+            temporizadorRandom = new System.Windows.Forms.Timer(components);
             SuspendLayout();
             // 
             // temporizadorDisparo
@@ -49,6 +50,10 @@ namespace pryReboriRenzoLAB3
             lblPuntaje.Size = new System.Drawing.Size(90, 21);
             lblPuntaje.TabIndex = 1;
             lblPuntaje.Text = "PUNTAJE: 0";
+            // 
+            // temporizadorRandom
+            // 
+            temporizadorRandom.Tick += temporizadorRandom_Tick;
             // 
             // frmMain
             // 
@@ -71,6 +76,7 @@ namespace pryReboriRenzoLAB3
         #endregion
         private System.Windows.Forms.Timer temporizadorDisparo;
         private System.Windows.Forms.Label lblPuntaje;
+        private System.Windows.Forms.Timer temporizadorRandom;
     }
 }
 

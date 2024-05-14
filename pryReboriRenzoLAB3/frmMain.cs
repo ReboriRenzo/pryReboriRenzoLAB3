@@ -30,6 +30,8 @@ namespace pryReboriRenzoLAB3
         Random EnemigosAleatorios = new Random();
         Random PosicionX = new Random();
         Random PosicionY = new Random();
+        Random rnd = new Random();
+        private bool nivel1Pasado = false;
 
         private void frmMain_Load(object sender, EventArgs e)
         {
@@ -88,10 +90,10 @@ namespace pryReboriRenzoLAB3
             {
 
                 Disparo = new PictureBox();
-                Disparo.BackColor = Color.Black;
+                Disparo.BackColor = Color.Red;
                 Disparo.Size = new Size(30, 40);
                 Disparo.SizeMode = PictureBoxSizeMode.StretchImage;
-                Disparo.ImageLocation = "https://img.freepik.com/fotos-premium/imagen-bala-sobre-fondo-negro_908985-50607.jpg";
+                Disparo.ImageLocation = "";
 
                 Disparo.Location = new Point(ObjNavejuegador.imgNave.Location.X + ObjNavejuegador.imgNave.Width / 2 - Disparo.Width / 2, ObjNavejuegador.imgNave.Location.Y);
                 Controls.Add(Disparo);
@@ -101,56 +103,82 @@ namespace pryReboriRenzoLAB3
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            // Itera sobre cada disparo en la lista
+
             foreach (PictureBox disparo in listaDisparos.ToList())
             {
                 if (disparo != null && disparo.Location.Y > 0)
                 {
-                    disparo.Location = new Point(
-                        disparo.Location.X,
-                        disparo.Location.Y - 10);
+                    disparo.Location = new Point(disparo.Location.X, disparo.Location.Y - 10);
 
-                    // Verifica si hay colisión entre el disparo y algún enemigo
                     foreach (Control control in Controls)
                     {
                         if (control is PictureBox && control != disparo)
                         {
-                            // Comprueba que el control no sea la nave del jugador
                             if (control != ObjNavejuegador.imgNave)
                             {
-                                // Si la colisión ocurre, elimina tanto al disparo como al enemigo
                                 if (disparo.Bounds.IntersectsWith(control.Bounds))
                                 {
+                                    // Si la bala golpea a un enemigo, elimina tanto la bala como el enemigo
                                     Controls.Remove(disparo);
                                     listaDisparos.Remove(disparo);
                                     Controls.Remove(control);
                                     control.Dispose();
 
-                                    // Incrementar el puntaje
-                                    puntaje += 100;
-                                    ActualizarPuntaje(); // Llama a un método para mostrar el puntaje actualizado
+                                    // Incrementa el puntaje
+                                    puntaje += 30;
+                                    ActualizarPuntaje();
 
-                                    break; // Sale del bucle interior para evitar colisiones múltiples
+                                    // Genera un nuevo enemigo en una posición aleatoria
+                                    GenerarNuevoEnemigoAleatorio();
+
+                                    break;
                                 }
                             }
                         }
                     }
                 }
-                else
-                {
-                    // Si el disparo sale de la pantalla, elimínalo y remuévelo de la lista
-                    Controls.Remove(disparo);
-                    listaDisparos.Remove(disparo);
-                }
             }
         }
-
-        private void ActualizarPuntaje()
+     private void ActualizarPuntaje()
         {
             // Muestra el puntaje actualizado en algún lugar de tu formulario
             // Por ejemplo, en un label llamado lblPuntaje
             lblPuntaje.Text = "PUNTAJE: " + puntaje.ToString();
         }
+        private void temporizadorRandom_Tick(object sender, EventArgs e)
+        {
+
+        } 
+            private void GenerarNuevoEnemigoAleatorio()
+            {
+                // Crea y configura las tres naves enemigas
+                for (int i = 1; i <= 3; i++)
+                {
+                    clsNave nuevoEnemigo = new clsNave();
+                    nuevoEnemigo.CrearEnemigos();
+
+                    // Genera posiciones aleatorias dentro de los límites del formulario
+                    int posX = rnd.Next(0, this.ClientSize.Width - nuevoEnemigo.imgNaveEnemiga.Width);
+                    int posY = rnd.Next(0, this.ClientSize.Height / 2);
+
+                    // Establece la posición del enemigo aleatorio
+                    switch (i)
+                    {
+                        case 1:
+                            nuevoEnemigo.imgNaveEnemiga.Location = new Point(posX, posY);
+                            Controls.Add(nuevoEnemigo.imgNaveEnemiga);
+                            break;
+                        case 2:
+                            nuevoEnemigo.imgNaveEnemiga2.Location = new Point(posX, posY);
+                            Controls.Add(nuevoEnemigo.imgNaveEnemiga2);
+                            break;
+                        case 3:
+                            nuevoEnemigo.imgNaveEnemiga3.Location = new Point(posX, posY);
+                            Controls.Add(nuevoEnemigo.imgNaveEnemiga3);
+                            break;
+                    }
+                }
+            }
+        }
     }
-    
-}
+
