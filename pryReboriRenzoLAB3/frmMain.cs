@@ -27,46 +27,74 @@ namespace pryReboriRenzoLAB3
         bool espacio = false;
         List<PictureBox> listaDisparos = new List<PictureBox>();
         private int puntaje = 0;
-        Random EnemigosAleatorios = new Random();
-        Random PosicionX = new Random();
-        Random PosicionY = new Random();
+        int cantidadMeta = 750;
         Random rnd = new Random();
         private bool nivel1Pasado = false;
 
+
         private void frmMain_Load(object sender, EventArgs e)
         {
-
             ObjNavejuegador = new clsNave();
             ObjNavejuegador.CrearJugador();
             Controls.Add(ObjNavejuegador.imgNave);
-            ObjNavejuegador.imgNave.Location = new Point(350, 400);
+            ObjNavejuegador.imgNave.Location = new Point(500, 550);
             ObjEnemigo = new clsNave();
 
-            //Enemigo3
+            //Enemigo1
             ObjEnemigo.CrearEnemigos();
             Controls.Add(ObjEnemigo.imgNaveEnemiga);
-            ObjEnemigo.imgNaveEnemiga.Location = new Point(500, 150);
+            ObjEnemigo.imgNaveEnemiga.Location = new Point(200, 125);
+
+            //Enemigo1
+            ObjEnemigo.CrearEnemigos();
+            Controls.Add(ObjEnemigo.imgNaveEnemiga);
+            ObjEnemigo.imgNaveEnemiga.Location = new Point(266, 317);
+
+            //Enemigo1
+            ObjEnemigo.CrearEnemigos();
+            Controls.Add(ObjEnemigo.imgNaveEnemiga);
+            ObjEnemigo.imgNaveEnemiga.Location = new Point(800, 250);
 
             //Enemigo2
             ObjEnemigo.CrearEnemigos();
             Controls.Add(ObjEnemigo.imgNaveEnemiga2);
             ObjEnemigo.imgNaveEnemiga2.Location = new Point(100, 100);
 
+            //Enemigo2
+            ObjEnemigo.CrearEnemigos();
+            Controls.Add(ObjEnemigo.imgNaveEnemiga2);
+            ObjEnemigo.imgNaveEnemiga2.Location = new Point(600, 200);
+
+            //Enemigo2
+            ObjEnemigo.CrearEnemigos();
+            Controls.Add(ObjEnemigo.imgNaveEnemiga2);
+            ObjEnemigo.imgNaveEnemiga2.Location = new Point(860, 124);
+
             //Enemigo3
             ObjEnemigo.CrearEnemigos();
             Controls.Add(ObjEnemigo.imgNaveEnemiga3);
-            ObjEnemigo.imgNaveEnemiga3.Location = new Point(305, 175);
+            ObjEnemigo.imgNaveEnemiga3.Location = new Point(355, 75);
+
+            //Enemigo3
+            ObjEnemigo.CrearEnemigos();
+            Controls.Add(ObjEnemigo.imgNaveEnemiga3);
+            ObjEnemigo.imgNaveEnemiga3.Location = new Point(710, 100);
+
+            //Enemigo3
+            ObjEnemigo.CrearEnemigos();
+            Controls.Add(ObjEnemigo.imgNaveEnemiga3);
+            ObjEnemigo.imgNaveEnemiga3.Location = new Point(555, 335);
         }
 
         private void frmMain_KeyDown_1(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Right)
             {
-                ObjNavejuegador.imgNave.Location = new Point(ObjNavejuegador.imgNave.Location.X + 5, ObjNavejuegador.imgNave.Location.Y);
+                ObjNavejuegador.imgNave.Location = new Point(ObjNavejuegador.imgNave.Location.X + 30, ObjNavejuegador.imgNave.Location.Y);
             }
             if (e.KeyCode == Keys.Left)
             {
-                ObjNavejuegador.imgNave.Location = new Point(ObjNavejuegador.imgNave.Location.X - 5, ObjNavejuegador.imgNave.Location.Y);
+                ObjNavejuegador.imgNave.Location = new Point(ObjNavejuegador.imgNave.Location.X - 30, ObjNavejuegador.imgNave.Location.Y);
             }
         }
 
@@ -75,12 +103,12 @@ namespace pryReboriRenzoLAB3
             if (e.KeyCode == Keys.Up)
             {
 
-                ObjNavejuegador.imgNave.Location = new Point(ObjNavejuegador.imgNave.Location.X, ObjNavejuegador.imgNave.Location.Y - 5);
+                ObjNavejuegador.imgNave.Location = new Point(ObjNavejuegador.imgNave.Location.X, ObjNavejuegador.imgNave.Location.Y - 30);
             }
             if (e.KeyCode == Keys.Down)
             {
 
-                ObjNavejuegador.imgNave.Location = new Point(ObjNavejuegador.imgNave.Location.X, ObjNavejuegador.imgNave.Location.Y + 5);
+                ObjNavejuegador.imgNave.Location = new Point(ObjNavejuegador.imgNave.Location.X, ObjNavejuegador.imgNave.Location.Y + 30);
             }
         }
 
@@ -91,7 +119,7 @@ namespace pryReboriRenzoLAB3
 
                 Disparo = new PictureBox();
                 Disparo.BackColor = Color.Red;
-                Disparo.Size = new Size(30, 40);
+                Disparo.Size = new Size(5, 10);
                 Disparo.SizeMode = PictureBoxSizeMode.StretchImage;
                 Disparo.ImageLocation = "";
 
@@ -109,6 +137,14 @@ namespace pryReboriRenzoLAB3
                 if (disparo != null && disparo.Location.Y > 0)
                 {
                     disparo.Location = new Point(disparo.Location.X, disparo.Location.Y - 10);
+
+                    // Verificar si el disparo está fuera de los límites del formulario
+                    if (disparo.Location.Y <= 0 || disparo.Location.X <= 0 || disparo.Location.X >= this.ClientSize.Width || disparo.Location.Y >= this.ClientSize.Height)
+                    {
+                        Controls.Remove(disparo);
+                        listaDisparos.Remove(disparo);
+                        continue; // Continuar con el siguiente disparo sin ejecutar el resto del código dentro del bucle
+                    }
 
                     foreach (Control control in Controls)
                     {
@@ -128,6 +164,9 @@ namespace pryReboriRenzoLAB3
                                     puntaje += 30;
                                     ActualizarPuntaje();
 
+                                    // Llama al método para manejar la muerte del enemigo
+                                    ManejarMuerteEnemigo();
+
                                     // Genera un nuevo enemigo en una posición aleatoria
                                     GenerarNuevoEnemigoAleatorio();
 
@@ -138,30 +177,57 @@ namespace pryReboriRenzoLAB3
                     }
                 }
             }
+
+
         }
-     private void ActualizarPuntaje()
+        private void ActualizarPuntaje()
         {
             // Muestra el puntaje actualizado en algún lugar de tu formulario
             // Por ejemplo, en un label llamado lblPuntaje
-            lblPuntaje.Text = "PUNTAJE: " + puntaje.ToString();
+            lblPuntaje.Text = "SCORE: " + puntaje.ToString();
+
+            // Verifica si el puntaje alcanza cierta cantidad
+            if (puntaje >= cantidadMeta)
+            {
+                // Muestra un mensaje
+                MessageBox.Show("¡Has alcanzado " + cantidadMeta.ToString() + " puntos! ¡Felicidades!");
+
+
+
+                // Reinicia el programa
+                ReiniciarPrograma();
+            }
+        }
+
+        private void ReiniciarPrograma()
+        {
+            
+            
+            puntaje = 0;
+            ActualizarPuntaje(); // Actualizar el puntaje en el formulario
+                                 
         }
         private void temporizadorRandom_Tick(object sender, EventArgs e)
         {
 
-        } 
-            private void GenerarNuevoEnemigoAleatorio()
+        }
+
+        bool generarEnemigos = true;
+        int enemigosMuertos = 0;
+        private void GenerarNuevoEnemigoAleatorio()
+        {
+            if (generarEnemigos)
             {
-                // Crea y configura las tres naves enemigas
                 for (int i = 1; i <= 3; i++)
                 {
                     clsNave nuevoEnemigo = new clsNave();
                     nuevoEnemigo.CrearEnemigos();
 
-                    // Genera posiciones aleatorias dentro de los límites del formulario
+                    // Generar posiciones aleatorias dentro de los límites del formulario
                     int posX = rnd.Next(0, this.ClientSize.Width - nuevoEnemigo.imgNaveEnemiga.Width);
                     int posY = rnd.Next(0, this.ClientSize.Height / 2);
 
-                    // Establece la posición del enemigo aleatorio
+                    // Establecer la posición del enemigo aleatorio
                     switch (i)
                     {
                         case 1:
@@ -180,5 +246,22 @@ namespace pryReboriRenzoLAB3
                 }
             }
         }
+        // Método para manejar la muerte de un enemigo
+        private void ManejarMuerteEnemigo()
+        {
+            enemigosMuertos++;
+
+            // Si se han muerto dos enemigos, desactiva la generación de enemigos
+            if (enemigosMuertos >= 5)
+            {
+                generarEnemigos = false;
+            }
+        }
+
+        private void lblPuntaje_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
+}
 

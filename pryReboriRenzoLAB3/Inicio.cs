@@ -17,14 +17,14 @@ namespace pryReboriRenzoLAB3
 
         private void btnFirma_Click(object sender, EventArgs e)
         {
-            frmFirma frm = new frmFirma();
-            this.Hide();
+            frmFirma Firma = new frmFirma();
+            Firma.ShowDialog();
         }
 
         private void btnGalaga_Click(object sender, EventArgs e)
         {
-            frmMain frm = new frmMain();
-            this.Show();
+            frmMain Main = new frmMain();
+            Main.ShowDialog();
         }
     }
 }

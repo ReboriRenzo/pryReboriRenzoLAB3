@@ -45,11 +45,12 @@ namespace pryReboriRenzoLAB3
             lblPuntaje.AutoSize = true;
             lblPuntaje.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             lblPuntaje.ForeColor = System.Drawing.Color.Red;
-            lblPuntaje.Location = new System.Drawing.Point(643, 9);
+            lblPuntaje.Location = new System.Drawing.Point(943, 22);
             lblPuntaje.Name = "lblPuntaje";
-            lblPuntaje.Size = new System.Drawing.Size(90, 21);
+            lblPuntaje.Size = new System.Drawing.Size(75, 21);
             lblPuntaje.TabIndex = 1;
-            lblPuntaje.Text = "PUNTAJE: 0";
+            lblPuntaje.Text = "SCORE: 0";
+            lblPuntaje.Click += lblPuntaje_Click;
             // 
             // temporizadorRandom
             // 
@@ -60,7 +61,7 @@ namespace pryReboriRenzoLAB3
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            ClientSize = new System.Drawing.Size(746, 494);
+            ClientSize = new System.Drawing.Size(1079, 642);
             Controls.Add(lblPuntaje);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             Name = "frmMain";
